@@ -1,0 +1,24 @@
+{
+  "name": "server-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -- --experimental-loader ./src/step4/node-jsx-loader.js ./src/step4/server.js",
+    "start": "node node-jsx-loader.js index.js"
+  },
+  "engines": {
+    "node": ">=20.3.1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.22.6",
+    "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "escape-html": "^1.0.3",
+    "nodemon": "^2.0.22",
+    "react": "^18.2.0"
+  }
+}

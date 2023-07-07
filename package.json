@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -- --experimental-loader ./src/step5/node-jsx-loader.js ./src/step5/server.js",
-    "start": "node node-jsx-loader.js index.js"
+    "start": "yarn start:rsc & yarn start:ssr",
+    "start:rsc": "nodemon -- --experimental-loader ./src/step6/node-jsx-loader.js ./src/step6/server/rsc.js",
+    "start:ssr": "nodemon -- --experimental-loader ./src/step6/node-jsx-loader.js ./src/step6/server/ssr.js"
   },
   "engines": {
     "node": ">=20.3.1"

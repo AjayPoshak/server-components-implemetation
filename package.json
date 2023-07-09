@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon -- --experimental-loader ./src/step5/node-jsx-loader.js ./src/step5/server.js",
     "start": "yarn start:rsc & yarn start:ssr",
-    "start:rsc": "nodemon -- --experimental-loader ./src/challenge2/node-jsx-loader.js ./src/challenge2/server/rsc.js",
-    "start:ssr": "nodemon -- --experimental-loader ./src/challenge2/node-jsx-loader.js ./src/challenge2/server/ssr.js"
+    "start:rsc": "nodemon -- --experimental-loader ./src/challenge3/node-jsx-loader.js ./src/challenge3/server/rsc.js",
+    "start:ssr": "nodemon -- --experimental-loader ./src/challenge3/node-jsx-loader.js ./src/challenge3/server/ssr.js"
   },
   "engines": {
     "node": ">=20.3.1"
@@ -22,6 +22,7 @@
     "escape-html": "^1.0.3",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.7"
   }
 }

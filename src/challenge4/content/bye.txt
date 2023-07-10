@@ -1,0 +1,7 @@
+Bye Bye!!
+
+[<img src="http://www.google.com.au/images/nav_logo7.png">](http://google.com.au/)
+
+<img src="http://www.google.com.au/images/nav_logo7.png">
+
+![image](./src/challenge4/nav_logo7.png)

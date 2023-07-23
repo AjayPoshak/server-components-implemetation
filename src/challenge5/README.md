@@ -73,3 +73,29 @@ if (request.method === "POST") {
 // Pass the parsed body to Router component so that it can forward it to Comments component as props
 const jsxString = await serveJSX(<Router url={url.pathname} body={body} />);
 ```
+
+Now what about intercepting the form submission and stopping page from reloading?
+
+We attach an `submit` event listener on `window`, prevent the default event functionality so that page does not reload on form submission. Then we call the `navigate` with this form data,
+
+`client.js`
+
+```js
+window.addEventListener(
+  "submit",
+  (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let payload = "";
+    for (let [key, value] of formData) {
+      payload += key;
+      payload += "=";
+      payload += value;
+    }
+    const { action: requestURL, method } = event.target;
+    navigate(requestURL, method, payload);
+    return false;
+  },
+  true
+);
+```

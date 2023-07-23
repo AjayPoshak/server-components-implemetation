@@ -39,6 +39,7 @@ const server = createServer(async (request, response) => {
     let clientJSXResponse = null;
     if (request.method === "POST") {
       const rawData = await rawReqToString(request);
+      console.log({ rawData });
       // `rawData` is in form `name=whatever-data`, so we extract the data and save it in a file
       const body = parseKeyValue(rawData);
       clientJSXResponse = await fetch("http://localhost:5001" + url.pathname, {

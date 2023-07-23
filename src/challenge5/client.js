@@ -15,14 +15,21 @@ function parseJSX(key, value) {
   return value;
 }
 
-async function fetchClientJSX(pathname) {
-  const response = await fetch(pathname + "?jsx=true");
+async function fetchClientJSX(pathname, method, payload) {
+  const url = pathname + "?jsx=true";
+  const response = await fetch(url, {
+    method,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: method.toUpperCase() === "POST" && payload ? payload : null,
+  });
   const fetchedJSX = await response.text();
   return JSON.parse(fetchedJSX, parseJSX);
 }
 
-async function navigate(href) {
-  const clientJSX = await fetchClientJSX(href);
+async function navigate(href, method = "GET", payload = {}) {
+  const clientJSX = await fetchClientJSX(href, method, payload);
   root.render(clientJSX);
 }
 
@@ -33,8 +40,6 @@ window.addEventListener(
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
       return;
     const href = event.target.getAttribute("href");
-    console.log("=======> ", { href });
-    // if (!href) return;
     // Nothing for external URLs
     if (href && !href.startsWith("/")) return;
     if (href && event.target.tagName === "A") {
@@ -42,6 +47,24 @@ window.addEventListener(
       window.history.pushState(null, null, href);
       navigate(href);
     }
+  },
+  true
+);
+
+window.addEventListener(
+  "submit",
+  (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let payload = "";
+    for (let [key, value] of formData) {
+      payload += key;
+      payload += "=";
+      payload += value;
+    }
+    const { action: requestURL, method } = event.target;
+    navigate(requestURL, method, payload);
+    return false;
   },
   true
 );
@@ -53,3 +76,22 @@ window.addEventListener(
 window.addEventListener("popstate", () => {
   navigate(window.location.pathname);
 });
+
+// window.addEventListener("load", () => {
+// const forms = document.getElementsByTagName("form");
+// for (const form of forms) {
+//   form.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     const formData = new FormData(form);
+//     let payload = "";
+//     for (let [key, value] of formData) {
+//       payload += key;
+//       payload += "=";
+//       payload += value;
+//     }
+//     const { action: requestURL, method } = event.target;
+//     navigate(requestURL, method, payload);
+//     return false;
+//   });
+// }
+// // });

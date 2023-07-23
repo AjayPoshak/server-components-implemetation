@@ -23,7 +23,7 @@ export async function Comments({ body, slug }) {
     <section>
       <form method="post">
         <input name="comment" type="text" />
-        <button>Add Comment</button>
+        <button type="submit">Add Comment</button>
       </form>
       {comments.map((comment, index) => (
         <div key={index}>{comment}</div>

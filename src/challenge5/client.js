@@ -76,22 +76,3 @@ window.addEventListener(
 window.addEventListener("popstate", () => {
   navigate(window.location.pathname);
 });
-
-// window.addEventListener("load", () => {
-// const forms = document.getElementsByTagName("form");
-// for (const form of forms) {
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(form);
-//     let payload = "";
-//     for (let [key, value] of formData) {
-//       payload += key;
-//       payload += "=";
-//       payload += value;
-//     }
-//     const { action: requestURL, method } = event.target;
-//     navigate(requestURL, method, payload);
-//     return false;
-//   });
-// }
-// // });

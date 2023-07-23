@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "nodemon -- --experimental-loader ./src/step5/node-jsx-loader.js ./src/step5/server.js",
     "start": "yarn start:rsc & yarn start:ssr",
-    "start:rsc": "nodemon -- --experimental-loader ./src/challenge6/node-jsx-loader.js ./src/challenge6/server/rsc.js",
-    "start:ssr": "nodemon -- --experimental-loader ./src/challenge6/node-jsx-loader.js ./src/challenge6/server/ssr.js"
+    "start:rsc": "nodemon -- --experimental-loader ./src/challenge7/node-jsx-loader.js ./src/challenge7/server/rsc.js",
+    "start:ssr": "nodemon -- --experimental-loader ./src/challenge7/node-jsx-loader.js ./src/challenge7/server/ssr.js"
   },
   "engines": {
     "node": ">=20.3.1"

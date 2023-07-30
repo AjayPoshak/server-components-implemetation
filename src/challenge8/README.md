@@ -182,3 +182,10 @@ function uncompactJSX(jsx) {
 ```
 
 After above compression, our JSX size for `/hello` route came down from `5.8KB` to `1.2KB`, almost 80% reduction in size, unbelievable!
+
+### Before
+
+<img width="1042" alt="Screenshot 2023-07-30 at 11 19 06 AM" src="https://github.com/AjayPoshak/server-components-implemetation/assets/7375457/46c9cd92-3905-4818-a225-f814d44a5fc9">
+
+### After
+<img width="1097" alt="Screenshot 2023-07-30 at 11 12 00 AM" src="https://github.com/AjayPoshak/server-components-implemetation/assets/7375457/87e93cca-d487-4f11-99a2-a26696beca47">

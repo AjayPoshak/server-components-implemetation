@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { renderToString } from "react-dom/server";
 
 async function serveJS(response, path) {
-  const content = await readFile(resolve(`./src/step6${path}`), "utf-8");
+  const content = await readFile(resolve(`./src/challenge8${path}`), "utf-8");
   response.setHeader("Content-Type", "text/javascript").end(content);
 }
 
@@ -13,6 +13,38 @@ function parseJSX(key, value) {
     return Symbol.for("react.element");
   }
   return value;
+}
+
+function compactJSX(json) {
+  function helper(input) {
+    if (!input) return [null, null, null];
+    const arr = [];
+    const { type, props } = input;
+    arr.push(input["$$typeof"] || null);
+    arr.push(type || null);
+    if (props && Object.keys(props).length > 0) {
+      const obj = {};
+      const keys = Object.keys(props);
+      keys.forEach((key) => {
+        if (key === "children") {
+          if (Array.isArray(props.children)) {
+            obj[key] = props.children.map((childComponent) =>
+              helper(childComponent)
+            );
+          } else {
+            obj[key] = props[key];
+          }
+        } else {
+          obj[key] = props[key];
+        }
+      });
+      arr.push(obj);
+    } else {
+      arr.push(null);
+    }
+    return arr;
+  }
+  return helper(json);
 }
 
 const server = createServer(async (request, response) => {
@@ -30,13 +62,13 @@ const server = createServer(async (request, response) => {
     }
     const clientJSX = await clientJSXResponse.text();
     if (url.searchParams.has("jsx")) {
+      const compactedJSX = compactJSX(JSON.parse(clientJSX));
       return response
         .setHeader("Content-Type", "application/json")
-        .end(clientJSX);
+        .end(JSON.stringify(compactedJSX));
     } else {
       const jsx = JSON.parse(clientJSX, parseJSX);
       let html = await renderToString(jsx);
-      console.log(html);
       html += `
     <script type="importmap">
         {

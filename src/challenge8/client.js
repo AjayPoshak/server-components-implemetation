@@ -15,10 +15,31 @@ function parseJSX(key, value) {
   return value;
 }
 
+function uncompactJSX(jsx) {
+  function helper(input) {
+    if (input.length === 0) return null;
+    const obj = {};
+    obj["$$typeof"] = input[0];
+    obj.type = input[1];
+    obj.props = input[2] || {};
+    obj.key = null;
+    obj.ref = null;
+    if (obj.props?.children && Array.isArray(obj.props?.children)) {
+      const childElements = obj.props.children;
+      const newChildren = childElements.map((child) => helper(child));
+      obj.props = { ...obj.props, children: newChildren };
+    }
+    return obj;
+  }
+  return helper(jsx);
+}
+
 async function fetchClientJSX(pathname) {
   const response = await fetch(pathname + "?jsx=true");
   const fetchedJSX = await response.text();
-  return JSON.parse(fetchedJSX, parseJSX);
+  const jsx = JSON.parse(fetchedJSX, parseJSX);
+  const uncompressedJSX = uncompactJSX(jsx);
+  return uncompressedJSX;
 }
 
 async function navigate(href) {

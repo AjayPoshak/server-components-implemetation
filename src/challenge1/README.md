@@ -1,6 +1,10 @@
+## Challenge1
+
 Add a random background color to the <body> of the page, and add a transition on the background color. When you navigate between the pages, you should see the background color animating.
 
-Solution: First of all, we need to generate a random background color, and attach it to body of the page.
+### Solution
+
+First of all, we need to generate a random background color, and attach it to body of the page.
 
 ```js
 function generateRandomBgColor() {

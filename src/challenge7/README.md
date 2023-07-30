@@ -1,6 +1,12 @@
+
+
+
+
 ## Challenge 7
 
 When you navigate between two different blog posts, their entire JSX gets diffed. But this doesn't always make sense — conceptually, these are two different posts. For example, if you start typing a comment on one of them, but then press a link, you don't want that comment to be preserved just because the input is in the same location. Can you think of a way to solve this? (Hint: You might want to teach the Router component to treat different pages with different URLs as different components by wrapping the {page} with something. Then you'd need to ensure this "something" doesn't get lost over the wire.)
+
+https://github.com/AjayPoshak/server-components-implemetation/assets/7375457/a61ea514-60f0-4d39-a7a3-15b043ba36aa
 
 ### Solution
 
